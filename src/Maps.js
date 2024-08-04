@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { AdvancedMarker, APIProvider, Infowindow, Map, Marker, Pin } from '@vis.gl/react-google-maps';
-
+import WebSocketContext from './WebSocketContext.js'
 
 const API_Key = 'AIzaSyCYBmTARagWHZnlzn4wcSgYzMkC4nmW1e4'; 
 
 function GPSMap() {
-  const [rlat, setRlat] = useState("")
-  const [rlng, setRlng] = useState("")
+  const data = useContext(WebSocketContext);
   const [mlat, setMlat] = useState("")
   const [mlng, setMlng] = useState("")
   const [markerLocation, setMarkerLocation] = useState({ lat: null, lng: null });
+  
+  const defaultLocation = { lat: 40, lng: -80 };
 
-  const RoverLocation = { lat: 43.17, lng: -79.87 };
+  const RoverLocation = {
+    lat: data.latitude !== 0 ? data.latitude : defaultLocation.lat,
+    lng: data.longitude !== 0 ? data.longitude : defaultLocation.lng,
+  };
 
   const handleLatChange = (event) => {
     setMlat(event.target.value);
@@ -25,18 +29,19 @@ function GPSMap() {
     setMarkerLocation({ lat: parseFloat(mlat), lng: parseFloat(mlng) });
   };
 
+  const location = {lat: 40, lng: -80};
+
+  
   return (
     <div>
         <div className="relative bg-slate-200 border-4 border-solid border-black h-[400px] w-[420px] rounded-lg overflow-hidden">
             <APIProvider apiKey={API_Key}>
             <div style={{ height: '100%', width: '100%' }}>
-                <Map center={RoverLocation} defaultZoom={10}>
-                    <Marker position={RoverLocation} />
+                <Map center={location} defaultZoom={10}>
+                    <Marker position={location} />
                     {markerLocation.lat !== null && markerLocation.lng !== null && (
-                    <AdvancedMarker position={markerLocation}>
-                        <Pin background={"purple"} borderColor={"purple"} glyphColor={"white"}/>
-                    </AdvancedMarker>
-                    )}
+                    <Marker position={markerLocation} />)
+                    }
                 </Map>
             </div>
             </APIProvider>

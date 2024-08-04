@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import WebSocket from "./WebSocket.js"
+import WebSocketComponent from "./WebSocket.js"
 import IntelCamera from "./IntelCamera.js"
 import GPSMap from "./Maps.js"
 
@@ -26,7 +26,7 @@ const App = () => {
         <div className="row-span-1">
           <div className="flex-1 p-2 flex flex-row h-96">
             <div className="flex-1">
-            <WebSocket />
+            <WebSocketComponent />
             </div>
             <div id="Motor Data" className="flex-1" > 
               <div className="relative w-[200px] h-[235px] p-10 overflow-hidden rounded-lg border-solid border-4 border-black bg-slate-200 shadow-lg">
