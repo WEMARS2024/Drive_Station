@@ -6,6 +6,7 @@ const API_Key = 'AIzaSyCYBmTARagWHZnlzn4wcSgYzMkC4nmW1e4';
 
 function GPSMap() {
   const data = useContext(WebSocketContext);
+  const data = useContext(WebSocketContext);
   const [mlat, setMlat] = useState("")
   const [mlng, setMlng] = useState("")
   const [markerLocation, setMarkerLocation] = useState({ lat: null, lng: null });
@@ -41,6 +42,8 @@ function GPSMap() {
                 <Map center={roverLocation} defaultZoom={10}>
                     <Marker position={roverLocation} />
                     {markerLocation.lat !== null && markerLocation.lng !== null && (
+                    <Marker position={markerLocation} />)
+                    }
                     <Marker position={markerLocation} />)
                     }
                 </Map>

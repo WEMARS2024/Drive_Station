@@ -1,7 +1,10 @@
 import React, { useContext } from 'react';
 import WebSocketContext from './WebSocketContext';
+import React, { useContext } from 'react';
+import WebSocketContext from './WebSocketContext';
 
 const WebSocketComponent = () => {
+  const data = useContext(WebSocketContext);
   const data = useContext(WebSocketContext);
 
   return (
