@@ -12,8 +12,10 @@ export const WebSocketProvider = ({ children }) => {
     speed: null,
   });
 
+  const [initialData, setInitialData] = useState(null);
+
   useEffect(() => {
-    const ws = new WebSocket('ws://192.168.137.235:5000');
+    const ws = new WebSocket('ws://192.168.1.4:5000');
 
     ws.onopen = () => {
       console.log('Connected to WebSocket server');
@@ -24,14 +26,20 @@ export const WebSocketProvider = ({ children }) => {
         const message = event.data;
         const dataArray = message.split(',');
 
-        setData({
+        const newData = {
           pitch: parseFloat(dataArray[0]),
           roll: parseFloat(dataArray[1]),
           yaw: parseFloat(dataArray[2]),
           longitude: parseFloat(dataArray[3]),
           latitude: parseFloat(dataArray[4]),
           speed: parseFloat(dataArray[5]),
-        });
+        };
+
+        setData(newData);
+
+        if (!initialData) {
+          setInitialData(newData);
+        }
       } catch (error) {
         console.error('Error parsing WebSocket message', error);
       }
@@ -48,10 +56,10 @@ export const WebSocketProvider = ({ children }) => {
     return () => {
       ws.close();
     };
-  }, []);
+  }, [initialData]);
 
   return (
-    <WebSocketContext.Provider value={data}>
+    <WebSocketContext.Provider value={{ data, initialData }}>
       {children}
     </WebSocketContext.Provider>
   );
