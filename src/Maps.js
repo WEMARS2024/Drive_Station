@@ -35,7 +35,7 @@ function GPSMap() {
 
   return (
     <div>
-        <div className="relative bg-slate-200 border-4 border-solid border-black h-[400px] w-[450px] right-[30px] rounded-lg overflow-hidden">
+        <div className="relative bg-slate-200 border-4 border-solid border-purple-700 h-[600px] w-[600px] rounded-lg overflow-hidden">
             <APIProvider apiKey={API_Key}>
             <div style={{ height: '100%', width: '100%' }}>
                 <Map center={roverLocation} defaultZoom={10}>
@@ -48,7 +48,7 @@ function GPSMap() {
             </APIProvider>
         </div>
         <div id="latInput">
-            <input className="relative p-1 rounded-md right-[3px] border-black border-solid m-1 border-[3px] shadow-md" 
+            <input className="relative p-1 rounded-md border-purple-700 border-solid m-1 border-[3px] top-[10px] shadow-md" 
             type="text" 
             value={mlat} 
             onChange={handleLatChange}
@@ -57,14 +57,14 @@ function GPSMap() {
             </input>
         </div>
         <div id="lngInput">
-            <input className="relative p-1 rounded-md right-[3px] border-black border-solid m-1 border-[3px] shadow-md" 
+            <input className="relative p-1 rounded-md border-purple-700 border-solid m-1 border-[3px] bottom-[36px] left-[210px] shadow-md" 
             type="text" 
             value={mlng} 
             onChange={handleLngChange}
             placeholder="Input Longitude">
             </input>
         </div>
-        <button className="relative bottom-[80px] left-[240px] rounded-md bg-purple-400 text-white p-5 shadow-md ease-in-out border-black border-solid border-2 hover:scale-110 hover:shadow-lg duration-200" 
+        <button className="relative bottom-[80px] left-[450px] rounded-md text-purple-700 font-medium bg-purple-100 p-5 shadow-md ease-in-out border-purple-700 border-solid border-[3px] hover:scale-110 hover:shadow-lg duration-200" 
         onClick={handleLocationChange}>Create Marker
 
         </button>
